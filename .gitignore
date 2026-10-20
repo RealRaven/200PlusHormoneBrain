@@ -50,12 +50,19 @@ desktop.ini
 *.log
 logs/
 
-# ── Memory / Chroma persistence (if any appear at root) ──────────────
+# ── Memory / Chroma persistence ──────────────────────────────────────
 chroma_db/
 chroma/
 persist_directory/
 *.chroma/
 *.sqlite3
+data/
+
+# ── Model weights / checkpoints ──────────────────────────────────────
+checkpoints/
+*.safetensors
+*.bin
+*.pt
 
 # ── Jupyter ──────────────────────────────────────────────────────────
 .ipynb_checkpoints/

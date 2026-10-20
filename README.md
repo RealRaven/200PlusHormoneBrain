@@ -11,6 +11,276 @@ trained with Unsloth.
 
 ---
 
+## Quick start
+
+```bash
+git clone https://github.com/RealRaven/200PlusHormoneBrain.git
+cd 200PlusHormoneBrain
+cp .env.example .env              # fill in HF_TOKEN and VLLM_REVISION
+make up
+```
+
+Then open:
+
+- **UI** — http://localhost:8501
+- **API** — http://localhost:8000/docs
+- **vLLM** — http://localhost:8001/v1/models
+
+First run pulls the model (~11 GB) — a few minutes. After that, `make up` is ~30 seconds to a running system.
+
+First time here? See [Setup](#setup) below for prerequisites, GPU verification, and troubleshooting.
+
+---
+
+## What this is
+
+Most "AI emotion" projects are one of three things: sentiment
+classification, prompt engineering, or a single mood float that scales
+temperature. This one is different. It's an actual attempt to give an
+LLM a *state* — a vector of 215 chemicals with half-lives, synthesis
+pathways, receptor affinities, and interaction networks — and to make
+that state change what the model thinks, recalls, and says.
+
+The simulation is composed of four pieces:
+
+- **A brain.** ~500 regions across forebrain, midbrain, hindbrain, and
+  spinal cord. Not all are implemented; the ones that are, drive the
+  hormone loop.
+- **A chemistry.** 215 hormones, neurotransmitters, enzymes, and
+  structural anchors in a YAML registry. Each has real clinical
+  metadata: half-life, receptor targets, precursors, reference ranges.
+- **A memory.** Four stores (episodic, semantic, procedural, working)
+  with state-dependent recall — memories formed under a given hormone
+  state are preferentially retrieved when that state recurs.
+- **A model.** Gemma 4 E2B IT, abliterated with Heretic, fine-tuned
+  with Unsloth for dual-output generation: an *internal monologue* that
+  reflects the raw state, and a *spoken response* that reflects judgment.
+
+## The three-panel view
+
+The project's UI is a single screen with three panels:
+
+| Panel | What it shows |
+|---|---|
+| **Left** | Brain state — regions light up with current hormone activity |
+| **Middle** | What the model is thinking — raw internal monologue, hot temperature |
+| **Right** | What the model says — composed response, cool temperature |
+
+The middle and right panels come from the **same model, same call, same
+hormone state**. What changes is the system prompt. This means the
+difference between thought and speech is a real generation difference,
+not a post-hoc rationalization.
+
+Say "I got into a fight with my boss." The left panel shows cortisol
+and noradrenaline spike. The middle panel shows the model's own
+thinking trace — narrowing focus, threat response, hedged language.
+The right panel shows a measured, professional response. Say "tell me
+about my childhood dog" with low salience — cortisol stays low, the
+middle panel shifts to something calmer, and the memory retrieved is
+different because the hormone-state match is different.
+
+## Why state-dependent recall matters
+
+This is the project's novel claim, and the one thing that would be
+publishable if it works:
+
+**A memory formed under high cortisol is preferentially retrieved when
+cortisol is high again, independent of semantic similarity.**
+
+This maps to mood-congruent memory in cognitive psychology (Bower's
+associative network theory). It's been observed in humans for decades.
+It has not, to our knowledge, been implemented as a retrieval
+mechanism in an LLM.
+
+The mechanism:
+
+1. When a memory is stored, the current hormone snapshot is frozen
+   into its metadata (215 floats, one per chemical).
+2. When a memory is recalled, the query is scored against four signals:
+   semantic similarity, **hormone state similarity**, recency, and
+   importance.
+3. The hormone similarity term — a weighted cosine over the state
+   vector — is what makes recall state-dependent.
+
+The A/B test is simple: for the same query, run recall with the
+hormone term enabled and disabled, and compare the top-k results.
+`memory/analytics.py` produces that report. If the ranking doesn't
+change with state, the whole project's premise doesn't hold and we
+say so.
+
+## Setup
+
+This section walks from a fresh clone to a running system: model served, gateway responding, UI rendering the three panels. It documents the **`feat/initial-setup`** branch; the same commands apply on `main` once it merges.
+
+### Prerequisites
+
+| Requirement | Notes |
+|---|---|
+| Docker 24+ with Compose v2 | `docker compose version` must work |
+| NVIDIA Container Toolkit | `nvidia-smi` must work **inside** a container |
+| GPU with ≥16 GB VRAM | E2B + Chroma + gateway share the card |
+| ~15 GB free disk | 11 GB weights + adapter space + Chroma |
+| Hugging Face account | Only needed if the pinned revision is gated |
+
+Verify the GPU is visible to Docker **before** continuing:
+
+```bash
+docker run --rm --gpus all nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi
+```
+
+If that fails, install the toolkit first: [NVIDIA docs](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html). Do not skip this — vLLM will fail to start with a confusing error if the toolkit is missing.
+
+### 1. Clone and checkout
+
+```bash
+git clone https://github.com/RealRaven/200PlusHormoneBrain.git
+cd 200PlusHormoneBrain
+git checkout feat/initial-setup
+```
+
+### 2. Configure environment
+
+```bash
+cp .env.example .env
+```
+
+Open `.env` and fill in:
+
+| Variable | Required | Notes |
+|---|---|---|
+| `MODEL_ID` | yes | `TrueRealRaven/gemma-4-E2B-it-heretic-v1` |
+| `VLLM_REVISION` | yes | Pinned commit hash — see `config/models.yaml` |
+| `HF_TOKEN` | if gated | Read token from https://huggingface.co/settings/tokens |
+| `VLLM_GPU_MEMORY_UTILIZATION` | no | Default `0.85`; lower if sharing the GPU |
+| `VLLM_MAX_MODEL_LEN` | no | Default `4096`; raise only if VRAM allows |
+
+The `VLLM_REVISION` pin matters — it's what prevents a silent model swap under you. The current value lives in `config/models.yaml`.
+
+### 3. Start the stack
+
+```bash
+make up
+```
+
+Three containers start, in order:
+
+1. **vLLM** on port 8001 — pulls the model on first run, loads it, then passes health check.
+2. **gateway** on port 8000 — waits for vLLM to be healthy, then starts.
+3. **ui** on port 8501 — waits for the gateway, then starts Streamlit.
+
+**First run**: model pull is ~11 GB over HTTPS. Expect 5–15 minutes depending on connection, plus ~90 seconds for vLLM to load. Subsequent `make up` calls are ~30 seconds.
+
+Follow progress:
+
+```bash
+make logs                    # all services
+docker compose logs -f vllm  # just the model pull
+```
+
+### 4. Verify
+
+| Endpoint | Expected |
+|---|---|
+| http://localhost:8001/v1/models | JSON listing the pinned model |
+| http://localhost:8000/health | `{"status":"ok"}` |
+| http://localhost:8000/state | `{"state":{...}}` with current chemical snapshot |
+| http://localhost:8501 | Three-panel Streamlit UI |
+
+Smoke test the gateway without touching the UI:
+
+```bash
+curl -N -X POST http://localhost:8000/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"hello"}'
+```
+
+You should see SSE events arrive in this order:
+
+```
+data: {"type":"state","data":{...}}
+data: {"type":"internal_delta","content":"..."}
+data: {"type":"spoken_delta","content":"..."}
+data: {"type":"done","internal":"...","spoken":"..."}
+```
+
+If the first line arrives but the deltas don't, vLLM is up but the prompt is being rejected — check `docker compose logs gateway`.
+
+### 5. Day-to-day commands
+
+```bash
+make up         # start (or restart) everything
+make down       # stop containers, keep volumes
+make logs       # follow all logs
+make test       # schema validation, symmetry check, smoke tests
+make lint       # ruff + mypy
+make clean      # remove caches
+```
+
+To wipe everything including the model cache (forces a re-pull on next start):
+
+```bash
+docker compose down -v
+rm -rf ~/.cache/huggingface    # only if you also want to clear the HF cache
+```
+
+### 6. Development mode (no container rebuild)
+
+For iterating on the gateway without rebuilding images:
+
+```bash
+# Terminal 1 — vLLM only
+docker compose up vllm
+
+# Terminal 2 — gateway with hot reload
+uvicorn gateway.main:app --reload --port 8000
+
+# Terminal 3 — Streamlit (optional)
+streamlit run ui/app.py
+```
+
+This lets you edit `gateway/`, `chemistry/`, and `config/` without a container rebuild. Set `GATEWAY_URL=http://localhost:8000` if you run the UI outside Compose.
+
+### 7. Troubleshooting
+
+**`make up` hangs at vLLM**
+First run pulls 11 GB. Tail the log to see progress:
+```bash
+docker compose logs -f vllm
+```
+If it sits at "Downloading" with no progress, `HF_TOKEN` is missing or the model is gated.
+
+**`nvidia-smi` works on host but not in container**
+NVIDIA Container Toolkit is missing or misconfigured. See prerequisites.
+
+**vLLM OOMs on startup**
+Lower `VLLM_GPU_MEMORY_UTILIZATION` in `.env` to `0.75`. If that still fails, another process is holding VRAM — `nvidia-smi` will show it.
+
+**Gateway exits with "vLLM unreachable"**
+The gateway waits for vLLM's health check and will restart in a loop until it passes. Check vLLM first:
+```bash
+docker compose logs vllm | tail -50
+```
+
+**UI shows "Cannot reach gateway"**
+The UI defaults to `GATEWAY_URL=http://gateway:8000` inside Compose. If you run the UI outside Compose, set `GATEWAY_URL=http://localhost:8000`.
+
+**Port conflict on 8000 / 8001 / 8501**
+Edit the port mappings in `docker-compose.yml`. Nothing in the code assumes these ports except the defaults in `config/settings.py`.
+
+### 8. What gets created
+
+```
+200PlusHormoneBrain/
+├── .env                    # your local secrets (gitignored)
+├── data/                   # memory persistence (gitignored)
+│   └── memory.json         # episodic store — setup branch
+├── checkpoints/            # fine-tuned adapters (gitignored)
+│   └── adapters/
+└── logs/                   # optional log tees (gitignored)
+```
+
+Model weights live outside the repo, in the Docker-managed HF cache volume (`hf_cache`). They survive `make down` and only re-download after `docker compose down -v`.
+
 ## What this is
 
 Most "AI emotion" projects are one of three things: sentiment
