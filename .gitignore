@@ -1,0 +1,64 @@
+# ── Python bytecode / caches ─────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# ── Virtual environments ─────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ── Packaging / distribution ─────────────────────────────────────────
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# ── Testing / coverage / lint ────────────────────────────────────────
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# ── IDE / editor ─────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Secrets / local config ───────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.local
+
+# ── Logs ─────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Memory / Chroma persistence (if any appear at root) ──────────────
+chroma_db/
+chroma/
+persist_directory/
+*.chroma/
+*.sqlite3
+
+# ── Jupyter ──────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Project-specific ─────────────────────────────────────────────────
+scripts/
