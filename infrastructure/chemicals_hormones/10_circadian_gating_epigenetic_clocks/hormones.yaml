@@ -1,0 +1,64 @@
+- id: clock_and_bmal1
+  name: CLOCK and BMAL1
+  type: other
+  aliases: [clock, bmal1, arntl]
+  is_measurable: false
+  tags: [circadian, transcription_factor]
+
+- id: per_and_cry
+  name: PER and CRY
+  type: other
+  aliases: [period, cryptochrome]
+  is_measurable: false
+  tags: [circadian, transcription_factor]
+
+- id: rev_erb_alpha
+  name: REV-ERBα
+  type: other
+  aliases: [nr1d1, rev_erba]
+  is_measurable: false
+  tags: [circadian, nuclear_receptor]
+
+- id: suprachiasmatic_nucleus_scn
+  name: Suprachiasmatic Nucleus (SCN)
+  type: other
+  aliases: [scn]
+  is_measurable: false
+  tags: [circadian, brain_region]
+
+- id: vip_circadian
+  name: Vasoactive Intestinal Peptide (VIP) — Circadian
+  type: neuropeptide
+  aliases: [vip]
+  half_life_minutes: 2
+  released_by: [suprachiasmatic_nucleus_scn]
+  baseline_level: 0.4
+  tags: [circadian, neuropeptide]
+
+# canonical home for melatonin and N-acetylserotonin (circadian)
+- id: n_acetylserotonin
+  name: N-Acetylserotonin
+  type: neurotransmitter
+  aliases: [nas]
+  molecular_formula: C12H14N2O2
+  half_life_minutes: 10
+  precursors: [serotonin]
+  released_by: [pineal_gland]
+  baseline_level: 0.4
+  diurnal: true
+  tags: [circadian, precursor]
+
+- id: melatonin
+  name: Melatonin
+  type: neuropeptide
+  molecular_formula: C13H16N2O2
+  half_life_minutes: 45
+  units: pg/mL
+  reference_range: [10, 60]
+  precursors: [n_acetylserotonin]
+  released_by: [pineal_gland]
+  acts_on: [suprachiasmatic_nucleus_scn]
+  receptors: {mt1: 1.0, mt2: 0.8}
+  baseline_level: 0.3
+  diurnal: true
+  tags: [circadian, primary, sleep, mood]

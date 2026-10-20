@@ -1,0 +1,25 @@
+- id: carbon_monoxide_endogenous
+  name: Carbon Monoxide (Endogenous)
+  type: gasotransmitter
+  aliases: [endogenous_co, co]
+  molecular_formula: CO
+  half_life_minutes: 240
+  baseline_level: 0.3
+  tags: [gasotransmitter]
+
+- id: hydrogen_sulfide_h2s
+  name: Hydrogen Sulfide (H2S)
+  type: gasotransmitter
+  aliases: [h2s]
+  molecular_formula: H2S
+  half_life_minutes: 1
+  baseline_level: 0.3
+  tags: [gasotransmitter]
+
+- id: inducible_nitric_oxide_inos
+  name: Inducible Nitric Oxide (iNOS-derived)
+  type: gasotransmitter
+  aliases: [inos_derived_no, inducible_no]
+  half_life_minutes: 1
+  baseline_level: 0.3
+  tags: [gasotransmitter, immune]

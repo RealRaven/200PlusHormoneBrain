@@ -1,0 +1,245 @@
+# ── classic neurotransmitters ─────────────────────────────────────────
+- id: dopamine
+  name: Dopamine
+  type: neurotransmitter
+  molecular_formula: C8H11NO2
+  half_life_minutes: 2
+  precursors: [tyrosine]
+  released_by: [ventral_tegmental_area, substantia_nigra]
+  acts_on: [striatum, prefrontal_cortex, nucleus_accumbens]
+  receptors: {d1: 1.0, d2: 1.0}
+  baseline_level: 0.5
+  tags: [neurotransmitter, primary, reward]
+
+- id: noradrenaline_norepinephrine
+  name: Noradrenaline (Norepinephrine)
+  type: neurotransmitter
+  aliases: [norepinephrine, noradrenaline]
+  molecular_formula: C8H11NO3
+  half_life_minutes: 2
+  precursors: [dopamine]
+  released_by: [locus_coeruleus]
+  acts_on: [cortex, hippocampus, amygdala]
+  receptors: {alpha_1: 0.8, alpha_2: 1.0, beta_1: 0.5}
+  baseline_level: 0.4
+  tags: [neurotransmitter, primary, stress]
+
+- id: adrenaline_epinephrine
+  name: Adrenaline (Epinephrine)
+  type: neurotransmitter
+  aliases: [epinephrine, adrenaline]
+  molecular_formula: C9H13NO3
+  half_life_minutes: 2
+  precursors: [noradrenaline_norepinephrine]
+  released_by: [adrenal_medulla]
+  baseline_level: 0.3
+  tags: [neurotransmitter, stress]
+
+- id: serotonin
+  name: Serotonin (5-HT)
+  type: neurotransmitter
+  aliases: [5_ht, 5_hydroxytryptamine]
+  molecular_formula: C10H12N2O
+  half_life_minutes: 5
+  precursors: [tryptophan]
+  released_by: [raphe_nuclei]
+  acts_on: [cortex, hippocampus, hypothalamus]
+  receptors: {5ht1a: 1.0, 5ht2a: 0.8}
+  baseline_level: 0.5
+  diurnal: true
+  tags: [neurotransmitter, primary, mood]
+
+- id: acetylcholine
+  name: Acetylcholine
+  type: neurotransmitter
+  molecular_formula: C7H16NO2
+  half_life_minutes: 1
+  precursors: [choline, acetyl_coa]
+  released_by: [basal_forebrain, pedunculopontine_nucleus]
+  receptors: {m1: 0.8, m2: 0.5, nicotinic: 0.7}
+  baseline_level: 0.5
+  tags: [neurotransmitter, primary]
+
+- id: glutamate
+  name: Glutamate
+  type: neurotransmitter
+  molecular_formula: C5H9NO4
+  half_life_minutes: 1
+  baseline_level: 0.5
+  tags: [neurotransmitter, primary, excitatory]
+
+- id: gaba
+  name: GABA
+  type: neurotransmitter
+  aliases: [gamma_aminobutyric_acid]
+  molecular_formula: C4H9NO2
+  half_life_minutes: 2
+  baseline_level: 0.5
+  tags: [neurotransmitter, primary, inhibitory]
+
+- id: glycine
+  name: Glycine
+  type: neurotransmitter
+  molecular_formula: C2H5NO2
+  half_life_minutes: 5
+  baseline_level: 0.5
+  tags: [neurotransmitter, inhibitory]
+
+- id: histamine
+  name: Histamine
+  type: neurotransmitter
+  molecular_formula: C5H9N3
+  half_life_minutes: 2
+  released_by: [tuberomammillary_nucleus]
+  baseline_level: 0.4
+  tags: [neurotransmitter, wake, immune]
+
+- id: d_serine
+  name: D-Serine
+  type: neurotransmitter
+  molecular_formula: C3H7NO3
+  half_life_minutes: 60
+  baseline_level: 0.4
+  tags: [neurotransmitter, glia]
+
+- id: adenosine
+  name: Adenosine
+  type: neurotransmitter
+  molecular_formula: C10H13N5O4
+  half_life_minutes: 1
+  baseline_level: 0.4
+  tags: [neurotransmitter, sleep, modulatory]
+
+- id: atp
+  name: ATP
+  type: neurotransmitter
+  aliases: [adenosine_triphosphate]
+  molecular_formula: C10H16N5O13P3
+  half_life_minutes: 1
+  baseline_level: 0.6
+  tags: [neurotransmitter, energy]
+
+- id: agmatine
+  name: Agmatine
+  type: neurotransmitter
+  molecular_formula: C5H14N4
+  half_life_minutes: 30
+  baseline_level: 0.4
+  tags: [neurotransmitter, modulatory]
+
+- id: trace_amines
+  name: Trace Amines
+  type: neurotransmitter
+  aliases: [taar_ligands]
+  half_life_minutes: 2
+  baseline_level: 0.3
+  tags: [neurotransmitter, modulatory]
+
+# ── neuropeptides ─────────────────────────────────────────────────────
+- id: beta_endorphin
+  name: β-Endorphin
+  type: neuropeptide
+  molecular_formula: C158H251N39O46S
+  half_life_minutes: 20
+  precursors: [pomc]
+  baseline_level: 0.4
+  tags: [neuropeptide, opioid, mood]
+
+- id: enkephalin
+  name: Enkephalin (Met/Leu)
+  type: neuropeptide
+  aliases: [met_enkephalin, leu_enkephalin]
+  half_life_minutes: 2
+  baseline_level: 0.4
+  tags: [neuropeptide, opioid]
+
+- id: endomorphin_1_and_2
+  name: Endomorphin-1 and Endomorphin-2
+  type: neuropeptide
+  aliases: [endomorphins]
+  half_life_minutes: 5
+  baseline_level: 0.4
+  tags: [neuropeptide, opioid, reward]
+
+- id: dynorphin
+  name: Dynorphin
+  type: neuropeptide
+  half_life_minutes: 5
+  baseline_level: 0.4
+  tags: [neuropeptide, opioid, dysphoria]
+
+- id: orexin_hypocretin
+  name: Orexin / Hypocretin
+  type: neuropeptide
+  aliases: [hypocretin, orexin_a, orexin_b]
+  half_life_minutes: 30
+  baseline_level: 0.4
+  tags: [neuropeptide, wake, appetite]
+
+- id: msh
+  name: Melanocyte-Stimulating Hormone (MSH)
+  type: neuropeptide
+  aliases: [alpha_msh, melanocyte_stimulating_hormone]
+  half_life_minutes: 20
+  precursors: [pomc]
+  baseline_level: 0.4
+  tags: [neuropeptide, appetite]
+
+# ── modulators and lipids ─────────────────────────────────────────────
+- id: anandamide
+  name: Anandamide (AEA)
+  type: neurotransmitter
+  aliases: [aea, arachidonoylethanolamide]
+  molecular_formula: C22H37NO2
+  half_life_minutes: 5
+  baseline_level: 0.4
+  tags: [endocannabinoid, mood]
+
+- id: two_ag
+  name: 2-Arachidonoylglycerol (2-AG)
+  type: neurotransmitter
+  aliases: [2_ag]
+  molecular_formula: C23H38O4
+  half_life_minutes: 10
+  baseline_level: 0.4
+  tags: [endocannabinoid, mood]
+
+- id: allopregnanolone
+  name: Allopregnanolone
+  type: steroid_hormone
+  aliases: [brexanolone]
+  molecular_formula: C21H34O2
+  half_life_minutes: 45
+  precursors: [progesterone]
+  receptors: {gaba_a: 1.0}
+  baseline_level: 0.4
+  tags: [neurosteroid, mood]
+
+# ── trophic factors and NO ────────────────────────────────────────────
+- id: bdnf
+  name: Brain-Derived Neurotrophic Factor (BDNF)
+  type: growth_factor
+  aliases: [bdnf_factor]
+  half_life_minutes: 10
+  units: ng/mL
+  reference_range: [20, 40]
+  baseline_level: 0.5
+  tags: [neurotrophic, mood, primary]
+
+- id: central_gdnf
+  name: Central GDNF
+  type: growth_factor
+  aliases: [brain_gdnf]
+  half_life_minutes: 30
+  baseline_level: 0.4
+  tags: [neurotrophic, mood]
+
+- id: neuronal_nitric_oxide
+  name: Neuronal Nitric Oxide (nNOS-derived)
+  type: gasotransmitter
+  aliases: [nno, nnos_derived_no]
+  half_life_minutes: 1
+  baseline_level: 0.4
+  tags: [gasotransmitter, neurotransmitter]
+
+# canonical home for N-acetylserotonin and melatonin is category 10

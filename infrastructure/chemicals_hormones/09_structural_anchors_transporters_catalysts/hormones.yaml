@@ -1,0 +1,78 @@
+- id: abc_transporters
+  name: ATP-Binding Cassette Transporters
+  type: transporter
+  aliases: [abc_transporter_family]
+  is_measurable: false
+  tags: [transporter, structural]
+
+- id: boron_organic
+  name: Boron (Organic)
+  type: mineral
+  is_measurable: true
+  tags: [mineral, trace]
+
+- id: coenzyme_q10
+  name: Coenzyme Q10 (Ubiquinone)
+  type: other
+  aliases: [coq10, ubiquinone]
+  molecular_formula: C59H90O4
+  units: ug/mL
+  reference_range: [0.5, 1.5]
+  baseline_level: 0.5
+  tags: [antioxidant, mitochondrial]
+
+- id: magnesium_chelate
+  name: Magnesium (Chelate)
+  type: mineral
+  aliases: [magnesium]
+  molecular_formula: Mg
+  units: mg/dL
+  reference_range: [1.7, 2.2]
+  baseline_level: 0.5
+  tags: [mineral, essential]
+
+- id: mitochondria
+  name: Mitochondria
+  type: organelle
+  is_measurable: false
+  tags: [organelle, structural]
+
+- id: peroxisomes
+  name: Peroxisomes
+  type: organelle
+  is_measurable: false
+  tags: [organelle, structural]
+
+- id: smooth_endoplasmic_reticulum
+  name: Smooth Endoplasmic Reticulum
+  type: organelle
+  aliases: [ser]
+  is_measurable: false
+  tags: [organelle, structural]
+
+- id: vitamin_k2_mk4
+  name: Vitamin K2 (MK-4)
+  type: vitamin
+  aliases: [menaquinone_4]
+  molecular_formula: C31H40O2
+  units: ng/mL
+  reference_range: [0.1, 1.0]
+  baseline_level: 0.5
+  tags: [vitamin, bone]
+
+- id: voltage_gated_calcium_channels
+  name: Voltage-Gated Calcium Channels
+  type: ion_channel
+  aliases: [vgcc]
+  is_measurable: false
+  tags: [channel, ion]
+
+- id: zinc_elemental
+  name: Zinc (Elemental)
+  type: mineral
+  aliases: [zinc]
+  molecular_formula: Zn
+  units: ug/dL
+  reference_range: [70, 120]
+  baseline_level: 0.5
+  tags: [mineral, essential]

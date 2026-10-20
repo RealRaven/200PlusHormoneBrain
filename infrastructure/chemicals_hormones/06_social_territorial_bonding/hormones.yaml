@@ -1,0 +1,70 @@
+- id: oxytocin
+  name: Oxytocin
+  type: peptide_hormone
+  aliases: [ot, pitocin]
+  molecular_formula: C43H66N12O12S2
+  half_life_minutes: 3
+  units: pg/mL
+  reference_range: [1, 5]
+  released_by: [hypothalamus_pvn, hypothalamus_son]
+  acts_on: [amygdala, nucleus_accumbens, prefrontal_cortex]
+  receptors: {oxtr: 1.0}
+  baseline_level: 0.4
+  tags: [social, primary, bonding]
+
+- id: vasopressin_adh
+  name: Vasopressin (ADH)
+  type: peptide_hormone
+  aliases: [antidiuretic_hormone, adh, avp, arginine_vasopressin]
+  molecular_formula: C46H65N15O12S2
+  half_life_minutes: 15
+  units: pg/mL
+  reference_range: [1, 5]
+  released_by: [hypothalamus_pvn, hypothalamus_son]
+  acts_on: [kidney, vasculature, brain]
+  receptors: {avpr1a: 1.0, avpr1b: 0.8, avpr2: 1.0}
+  baseline_level: 0.4
+  tags: [social, primary, bonding, fluid]
+
+- id: melanin_concentrating_hormone
+  name: Melanin-Concentrating Hormone (MCH)
+  type: neuropeptide
+  aliases: [mch]
+  half_life_minutes: 10
+  released_by: [lateral_hypothalamus, zona_incerta]
+  baseline_level: 0.4
+  tags: [social, appetite, sleep]
+
+- id: nociceptin
+  name: Nociceptin / Orphanin FQ
+  type: neuropeptide
+  aliases: [orphanin_fq, n_ofq]
+  half_life_minutes: 10
+  baseline_level: 0.4
+  tags: [social, opioid, stress]
+
+- id: phenylethylamine_pea
+  name: Phenylethylamine (PEA)
+  type: neurotransmitter
+  aliases: [pea, beta_phenylethylamine]
+  molecular_formula: C8H11N
+  half_life_minutes: 1
+  baseline_level: 0.3
+  tags: [social, mood, trace_amine]
+
+# receptor density markers (not chemicals, but kept for compatibility)
+- id: d1_receptor_density
+  name: D1 Receptor Density
+  type: receptor
+  is_measurable: true
+  model_as_level: true
+  tags: [social, receptor_density]
+
+- id: d2_receptor_density
+  name: D2 Receptor Density
+  type: receptor
+  is_measurable: true
+  model_as_level: true
+  tags: [social, receptor_density]
+
+# prolactin (canonical home = 01) tagged as social_bonding there
