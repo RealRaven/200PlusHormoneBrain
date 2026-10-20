@@ -61,4 +61,4 @@ persist_directory/
 .ipynb_checkpoints/
 
 # ── Project-specific ─────────────────────────────────────────────────
-scripts/
+hidden_scripts/
