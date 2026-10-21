@@ -1,10 +1,17 @@
 import os
+import threading
 import time
 
-from chemistry import loader, tick
-from config.settings import settings
+from gateway import tick, loader, settings
 
 _USE_MEMORY = os.getenv("USE_MEMORY", "0") == "1"
+
+if _USE_MEMORY:
+    raise RuntimeError(
+        "USE_MEMORY=1 is not supported on this branch: the 'memory' package "
+        "(memory.recall, memory.base) has not been implemented yet. "
+        "Unset USE_MEMORY or set it to '0'."
+    )
 
 
 class Orchestrator:
@@ -22,25 +29,22 @@ class Orchestrator:
         return tick.snapshot(self.chemicals)
 
     def recall_for(self, message: str, state: dict[str, float]) -> list[str]:
-        if not _USE_MEMORY:
-            return []
-        from memory.recall import recall  # local import — memory branch only
-        return [m.content for m in recall(message, state, self.episodic.all(), limit=5)]
+        # Memory is not implemented on this branch (see module-level guard).
+        return []
 
     def record(self, message: str, state: dict[str, float]) -> None:
-        if not _USE_MEMORY:
-            return
-        from memory.base import MemoryEntry  # local import — memory branch only
-        entry = MemoryEntry(content=message, state_snapshot=state)
-        self.episodic.add(entry)
-        self.working.add(entry)
+        # Memory is not implemented on this branch (see module-level guard).
+        return
 
 
 _orchestrator: Orchestrator | None = None
+_orchestrator_lock = threading.Lock()
 
 
 def get_orchestrator() -> Orchestrator:
     global _orchestrator
     if _orchestrator is None:
-        _orchestrator = Orchestrator()
+        with _orchestrator_lock:
+            if _orchestrator is None:
+                _orchestrator = Orchestrator()
     return _orchestrator

@@ -12,7 +12,7 @@ install-dev:  ## Install dev deps
 install-vllm:  ## Install vLLM on host (only needed outside Docker)
 	pip install -r requirements-vllm.txt
 
-up:  ## Start all services
+up: install install-dev install-vllm  ## Start all services (and sync all local venv deps)
 	@test -f .env || (echo "Missing .env — run: cp .env.example .env" && exit 1)
 	docker compose up -d --build
 	@echo "Gateway: http://localhost:8000/docs"
