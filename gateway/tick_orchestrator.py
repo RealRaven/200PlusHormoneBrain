@@ -2,7 +2,8 @@ import os
 import threading
 import time
 
-from gateway import tick, loader, settings
+from chemistry import tick, loader
+from config.settings import settings
 
 _USE_MEMORY = os.getenv("USE_MEMORY", "0") == "1"
 

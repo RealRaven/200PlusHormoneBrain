@@ -1,4 +1,4 @@
-.PHONY: help install install-dev install-vllm up down logs dev test lint format clean
+.PHONY: help install install-dev install-vllm install-ui up down logs dev test lint format clean
 
 help:  ## Show targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
@@ -12,7 +12,10 @@ install-dev:  ## Install dev deps
 install-vllm:  ## Install vLLM on host (only needed outside Docker)
 	pip install -r requirements-vllm.txt
 
-up: install install-dev install-vllm  ## Start all services (and sync all local venv deps)
+install-ui:  ## Install UI deps locally for IDE support
+	pip install streamlit requests
+
+up: install install-dev install-ui  ## Install all local deps, then start Docker
 	@test -f .env || (echo "Missing .env — run: cp .env.example .env" && exit 1)
 	docker compose up -d --build
 	@echo "Gateway: http://localhost:8000/docs"

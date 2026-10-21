@@ -38,7 +38,7 @@ services:
     environment:
       VLLM_BASE_URL: http://vllm:8001/v1
       USE_MEMORY: "0"
-      PYTHONPATH: /app:/app/infrastructure/chemicals_hormones
+      PYTHONPATH: /app
     volumes:
       - ./data:/app/data
     depends_on:
