@@ -5,10 +5,11 @@ services:
       - "8001:8001"
     volumes:
       - hf_cache:/root/.cache/huggingface
+      - vllm_cache:/root/.cache/vllm
     environment:
       HF_TOKEN: ${HF_TOKEN:-}
     command: >
-      --model ${MODEL_ID:-google/gemma-2-2b-it}
+      ${MODEL_ID:-google/gemma-2-2b-it}
       --port 8001
       --max-model-len ${VLLM_MAX_MODEL_LEN:-4096}
       --gpu-memory-utilization ${VLLM_GPU_MEMORY_UTILIZATION:-0.85}
@@ -21,10 +22,10 @@ services:
               capabilities: [gpu]
     healthcheck:
       test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8001/health\")'"]
-      interval: 30s
-      timeout: 10s
-      retries: 20
-      start_period: 300s
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 120s
 
   gateway:
     build:
@@ -35,6 +36,7 @@ services:
     env_file: .env
     environment:
       VLLM_BASE_URL: http://vllm:8001/v1
+      USE_MEMORY: "0"
     volumes:
       - ./data:/app/data
     depends_on:
@@ -60,3 +62,4 @@ services:
 
 volumes:
   hf_cache:
+  vllm_cache:

@@ -16,7 +16,7 @@ trained with Unsloth.
 ```bash
 git clone https://github.com/RealRaven/200PlusHormoneBrain.git
 cd 200PlusHormoneBrain
-cp .env.example .env              # fill in HF_TOKEN and VLLM_REVISION
+cp .env.example .env
 make up
 ```
 
@@ -2352,27 +2352,3 @@ All upstream dependencies are compatible: Heretic (MIT), Unsloth
   cleanest abliteration tool available
 - **Unsloth** for making fine-tuning possible on a single GPU
 - **vLLM** for making inference fast enough to feel like a conversation
-
-## Citation
-
-If you use this project or its models:
-
-```bibtex
-@misc{200plushormonebrain2026,
-  title  = {200PlusHormoneBrain: an LLM on a neuroendocrine simulation},
-  author = {<your-name>},
-  year   = {2026},
-  url    = {https://github.com/<your-username>/200PlusHormoneBrain}
-}
-```
-
-For the base model specifically:
-
-```bibtex
-@misc{gemma4e2bheretic2026,
-  title  = {Gemma 4 E2B IT — Heretic v1},
-  author = {<your-name>},
-  year   = {2026},
-  url    = {https://huggingface.co/TrueRealRaven/gemma-4-E2B-it-heretic-v1}
-}
-```
