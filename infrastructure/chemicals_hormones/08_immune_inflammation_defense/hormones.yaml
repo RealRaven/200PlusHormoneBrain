@@ -1,0 +1,195 @@
+- id: il_1_beta
+  name: Interleukin-1β
+  type: cytokine
+  aliases: [il1b, il_1b]
+  half_life_minutes: 10
+  units: pg/mL
+  baseline_level: 0.3
+  tags: [immune, pro_inflammatory, primary]
+
+- id: il_1ra
+  name: Interleukin-1 Receptor Antagonist
+  type: cytokine
+  aliases: [il1ra]
+  half_life_minutes: 240
+  baseline_level: 0.3
+  tags: [immune, anti_inflammatory]
+
+- id: il_2
+  name: Interleukin-2
+  type: cytokine
+  aliases: [il2]
+  half_life_minutes: 90
+  baseline_level: 0.3
+  tags: [immune]
+
+- id: il_6
+  name: Interleukin-6
+  type: cytokine
+  aliases: [il6]
+  half_life_minutes: 120
+  units: pg/mL
+  baseline_level: 0.3
+  tags: [immune, pro_inflammatory, primary]
+
+- id: il_10
+  name: Interleukin-10
+  type: cytokine
+  aliases: [il10]
+  half_life_minutes: 120
+  units: pg/mL
+  baseline_level: 0.3
+  tags: [immune, anti_inflammatory]
+
+- id: il_12
+  name: Interleukin-12
+  type: cytokine
+  aliases: [il12]
+  half_life_minutes: 240
+  baseline_level: 0.3
+  tags: [immune]
+
+- id: il_15_nk_activator
+  name: Interleukin-15
+  type: cytokine
+  aliases: [il15]
+  half_life_minutes: 120
+  baseline_level: 0.3
+  tags: [immune, nk_cell]
+
+- id: il_17a
+  name: Interleukin-17A
+  type: cytokine
+  aliases: [il17a]
+  half_life_minutes: 120
+  baseline_level: 0.3
+  tags: [immune, pro_inflammatory]
+
+- id: tnf_alpha
+  name: Tumor Necrosis Factor-α
+  type: cytokine
+  aliases: [tnfa, cachectin]
+  half_life_minutes: 20
+  units: pg/mL
+  baseline_level: 0.3
+  tags: [immune, pro_inflammatory, primary]
+
+- id: interferon_gamma
+  name: Interferon-γ
+  type: cytokine
+  aliases: [ifng]
+  half_life_minutes: 60
+  baseline_level: 0.3
+  tags: [immune]
+
+- id: type_1_interferons_alpha_beta
+  name: Type I Interferons (α/β)
+  type: cytokine
+  aliases: [ifna, ifnb]
+  half_life_minutes: 120
+  baseline_level: 0.3
+  tags: [immune, antiviral]
+
+- id: tgf_beta
+  name: Transforming Growth Factor-β
+  type: cytokine
+  aliases: [tgfb]
+  half_life_minutes: 30
+  baseline_level: 0.4
+  tags: [immune, anti_inflammatory]
+
+- id: crp
+  name: C-Reactive Protein
+  type: other
+  aliases: [c_reactive_protein]
+  half_life_minutes: 1140
+  units: mg/L
+  reference_range: [0, 5]
+  baseline_level: 0.3
+  tags: [immune, acute_phase, primary]
+
+- id: chemokine_cxcl8_il8
+  name: CXCL8 (IL-8)
+  type: cytokine
+  aliases: [il8, cxcl8, interleukin_8]
+  half_life_minutes: 30
+  baseline_level: 0.3
+  tags: [immune, chemokine]
+
+- id: mip_1alpha_and_1beta
+  name: MIP-1α and MIP-1β
+  type: cytokine
+  aliases: [ccl3, ccl4]
+  half_life_minutes: 20
+  baseline_level: 0.3
+  tags: [immune, chemokine]
+
+- id: hmgb1
+  name: HMGB1
+  type: other
+  aliases: [high_mobility_group_box_1]
+  half_life_minutes: 30
+  baseline_level: 0.3
+  tags: [immune, alarmin]
+
+- id: soluble_cd14
+  name: Soluble CD14
+  type: other
+  aliases: [scd14]
+  half_life_minutes: 180
+  baseline_level: 0.3
+  tags: [immune]
+
+- id: leukotriene_b4
+  name: Leukotriene B4
+  type: other
+  aliases: [ltb4]
+  molecular_formula: C20H32O4
+  half_life_minutes: 5
+  baseline_level: 0.3
+  tags: [immune, eicosanoid]
+
+- id: lipoxin_a4
+  name: Lipoxin A4
+  type: other
+  aliases: [lxa4]
+  molecular_formula: C20H32O5
+  half_life_minutes: 10
+  baseline_level: 0.3
+  tags: [immune, anti_inflammatory, eicosanoid]
+
+- id: resolvin_e1
+  name: Resolvin E1
+  type: other
+  aliases: [rve1]
+  molecular_formula: C20H30O5
+  half_life_minutes: 10
+  baseline_level: 0.3
+  tags: [immune, anti_inflammatory, eicosanoid]
+
+- id: immunoglobulin_a_iga
+  name: Immunoglobulin A (IgA)
+  type: other
+  aliases: [iga]
+  half_life_minutes: 360
+  units: mg/dL
+  reference_range: [70, 400]
+  baseline_level: 0.4
+  tags: [immune, antibody]
+
+- id: thymosin
+  name: Thymosin
+  type: peptide_hormone
+  aliases: [thymosin_alpha_1, thymosin_beta_4]
+  half_life_minutes: 120
+  baseline_level: 0.3
+  tags: [immune]
+
+- id: histamine_peripheral
+  name: Histamine (Peripheral)
+  type: other
+  aliases: [peripheral_histamine, mast_cell_histamine]
+  molecular_formula: C5H9N3
+  half_life_minutes: 2
+  baseline_level: 0.3
+  tags: [immune, allergy]

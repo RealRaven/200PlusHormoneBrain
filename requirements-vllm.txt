@@ -1,0 +1,4 @@
+# Only needed if running vLLM locally without Docker
+vllm>=0.5
+torch>=2.2
+transformers>=4.40

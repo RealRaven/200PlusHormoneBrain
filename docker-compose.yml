@@ -1,0 +1,67 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    ports:
+      - "8001:8001"
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+      - vllm_cache:/root/.cache/vllm
+    ipc: host
+    environment:
+      HF_TOKEN: ${HF_TOKEN:-}
+    command: >
+      --model ${MODEL_ID:-TrueRealRaven/gemma-4-E2B-it-heretic-v1}
+      --port 8001
+      --max-model-len ${VLLM_MAX_MODEL_LEN:-4096}
+      --gpu-memory-utilization ${VLLM_GPU_MEMORY_UTILIZATION:-0.85}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8001/health\")'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 180s
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      VLLM_BASE_URL: http://vllm:8001/v1
+      USE_MEMORY: "0"
+      PYTHONPATH: /app
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      vllm:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/health\")'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      GATEWAY_URL: http://gateway:8000
+    depends_on:
+      gateway:
+        condition: service_healthy
+
+volumes:
+  hf_cache:
+  vllm_cache:

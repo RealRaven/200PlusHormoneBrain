@@ -1,0 +1,157 @@
+- id: ghrelin
+  name: Ghrelin
+  type: peptide_hormone
+  half_life_minutes: 30
+  units: pg/mL
+  reference_range: [100, 1000]
+  released_by: [stomach, arcuate_nucleus]
+  acts_on: [hypothalamus]
+  baseline_level: 0.4
+  tags: [appetite, primary]
+
+- id: ghrelin_o_acyltransferase_goat
+  name: Ghrelin O-Acyltransferase (GOAT)
+  type: enzyme
+  aliases: [mboat4]
+  is_measurable: false
+  tags: [appetite, enzyme]
+
+- id: leptin
+  name: Leptin
+  type: peptide_hormone
+  half_life_minutes: 30
+  units: ng/mL
+  reference_range: [1, 25]
+  released_by: [adipose]
+  acts_on: [hypothalamus]
+  baseline_level: 0.5
+  diurnal: true
+  tags: [appetite, primary]
+
+- id: adiponectin
+  name: Adiponectin
+  type: peptide_hormone
+  half_life_minutes: 180
+  units: ug/mL
+  reference_range: [5, 30]
+  released_by: [adipose]
+  baseline_level: 0.5
+  tags: [metabolic]
+
+- id: cholecystokinin_cck
+  name: Cholecystokinin (CCK)
+  type: peptide_hormone
+  aliases: [cck]
+  half_life_minutes: 3
+  released_by: [small_intestine, brain]
+  baseline_level: 0.4
+  tags: [appetite, gut]
+
+- id: glp_1
+  name: Glucagon-Like Peptide 1 (GLP-1)
+  type: peptide_hormone
+  aliases: [glp1]
+  half_life_minutes: 2
+  units: pmol/L
+  reference_range: [5, 25]
+  released_by: [small_intestine, nucleus_of_solitary_tract]
+  baseline_level: 0.4
+  tags: [appetite, gut, metabolic]
+
+- id: glp_2
+  name: Glucagon-Like Peptide 2 (GLP-2)
+  type: peptide_hormone
+  aliases: [glp2]
+  half_life_minutes: 7
+  released_by: [small_intestine]
+  baseline_level: 0.4
+  tags: [gut]
+
+- id: pyy
+  name: Peptide YY
+  type: peptide_hormone
+  half_life_minutes: 8
+  units: pg/mL
+  reference_range: [20, 200]
+  released_by: [small_intestine, colon]
+  baseline_level: 0.4
+  tags: [appetite, gut]
+
+- id: oxyntomodulin
+  name: Oxyntomodulin
+  type: peptide_hormone
+  half_life_minutes: 8
+  released_by: [small_intestine]
+  baseline_level: 0.4
+  tags: [appetite, gut]
+
+- id: neurotensin
+  name: Neurotensin
+  type: neuropeptide
+  half_life_minutes: 4
+  released_by: [small_intestine, brain]
+  baseline_level: 0.4
+  tags: [gut, neuropeptide]
+
+- id: nesfatin_1
+  name: Nesfatin-1
+  type: peptide_hormone
+  half_life_minutes: 30
+  released_by: [hypothalamus, adipose]
+  baseline_level: 0.4
+  tags: [appetite, satiety]
+
+- id: motilin
+  name: Motilin
+  type: peptide_hormone
+  half_life_minutes: 10
+  released_by: [small_intestine]
+  baseline_level: 0.4
+  tags: [gut]
+
+- id: gastrin
+  name: Gastrin
+  type: peptide_hormone
+  half_life_minutes: 6
+  units: pg/mL
+  reference_range: [0, 100]
+  released_by: [stomach_antrum]
+  baseline_level: 0.4
+  tags: [gut]
+
+- id: secretin
+  name: Secretin
+  type: peptide_hormone
+  half_life_minutes: 4
+  released_by: [duodenum]
+  baseline_level: 0.4
+  tags: [gut]
+
+- id: pancreatic_polypeptide
+  name: Pancreatic Polypeptide
+  type: peptide_hormone
+  aliases: [pp]
+  half_life_minutes: 5
+  units: pg/mL
+  reference_range: [20, 300]
+  released_by: [pancreatic_islets]
+  baseline_level: 0.4
+  tags: [appetite, gut]
+
+- id: fgf21
+  name: Fibroblast Growth Factor 21 (FGF21)
+  type: growth_factor
+  half_life_minutes: 60
+  units: pg/mL
+  reference_range: [50, 500]
+  released_by: [liver, adipose]
+  baseline_level: 0.4
+  tags: [metabolic]
+
+- id: oleoylethanolamide_oea
+  name: Oleoylethanolamide (OEA)
+  type: other
+  aliases: [oea]
+  half_life_minutes: 30
+  baseline_level: 0.4
+  tags: [appetite, lipid]

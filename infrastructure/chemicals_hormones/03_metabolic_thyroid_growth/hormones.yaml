@@ -1,0 +1,258 @@
+# ── hypothalamic-pituitary-thyroid ────────────────────────────────────
+- id: trh
+  name: Thyrotropin-Releasing Hormone
+  type: neuropeptide
+  aliases: [thyroliberin]
+  half_life_minutes: 5
+  released_by: [hypothalamus_pvn]
+  acts_on: [pituitary_anterior]
+  baseline_level: 0.4
+  tags: [thyroid, primary]
+
+- id: tsh
+  name: Thyroid-Stimulating Hormone (TSH)
+  type: peptide_hormone
+  aliases: [thyrotropin]
+  half_life_minutes: 50
+  units: mIU/L
+  reference_range: [0.4, 4.0]
+  released_by: [pituitary_anterior]
+  acts_on: [thyroid]
+  baseline_level: 0.4
+  tags: [thyroid, primary]
+
+- id: thyroxine_t4
+  name: Thyroxine (T4)
+  type: peptide_hormone
+  aliases: [t4, tetraiodothyronine]
+  molecular_formula: C15H11I4NO4
+  half_life_minutes: 10080
+  units: ug/dL
+  reference_range: [5, 12]
+  released_by: [thyroid]
+  baseline_level: 0.5
+  tags: [thyroid, primary]
+
+- id: triiodothyronine_t3
+  name: Triiodothyronine (T3)
+  type: peptide_hormone
+  aliases: [t3]
+  molecular_formula: C15H12I3NO4
+  half_life_minutes: 1440
+  units: ng/dL
+  reference_range: [80, 200]
+  released_by: [thyroid, liver]
+  baseline_level: 0.5
+  tags: [thyroid, primary]
+
+- id: free_t4
+  name: Free T4
+  type: peptide_hormone
+  aliases: [ft4, free_thyroxine]
+  half_life_minutes: 10080
+  units: ng/dL
+  reference_range: [0.8, 1.8]
+  baseline_level: 0.5
+  tags: [thyroid]
+
+- id: free_t3
+  name: Free T3
+  type: peptide_hormone
+  aliases: [ft3, free_triiodothyronine]
+  half_life_minutes: 1440
+  units: pg/mL
+  reference_range: [2.3, 4.2]
+  baseline_level: 0.5
+  tags: [thyroid]
+
+- id: reverse_t3
+  name: Reverse T3 (rT3)
+  type: peptide_hormone
+  aliases: [rt3]
+  half_life_minutes: 120
+  units: ng/dL
+  reference_range: [10, 24]
+  baseline_level: 0.3
+  tags: [thyroid]
+
+- id: thyronamines_3_t1am
+  name: 3-Iodothyronamine (3-T1AM)
+  type: other
+  aliases: [t1am]
+  baseline_level: 0.3
+  tags: [thyroid, trace_amine]
+
+- id: type_1_deiodinase_dio1
+  name: Type 1 Deiodinase (DIO1)
+  type: enzyme
+  is_measurable: false
+  tags: [thyroid, enzyme]
+
+- id: type_2_deiodinase_dio2
+  name: Type 2 Deiodinase (DIO2)
+  type: enzyme
+  is_measurable: false
+  tags: [thyroid, enzyme]
+
+- id: type_3_deiodinase_dio3
+  name: Type 3 Deiodinase (DIO3)
+  type: enzyme
+  is_measurable: false
+  tags: [thyroid, enzyme]
+
+# ── growth hormone / IGF-1 axis ───────────────────────────────────────
+- id: ghrh
+  name: Growth Hormone-Releasing Hormone
+  type: neuropeptide
+  aliases: [somatocrinin, growth_hormone_releasing_hormone]
+  half_life_minutes: 7
+  released_by: [hypothalamus_arcuate]
+  baseline_level: 0.4
+  tags: [growth, primary]
+
+- id: somatostatin
+  name: Somatostatin
+  type: neuropeptide
+  aliases: [growth_hormone_inhibiting_hormone, ghih, sst]
+  half_life_minutes: 3
+  released_by: [hypothalamus_periventricular, pancreas]
+  baseline_level: 0.4
+  tags: [growth, metabolic]
+
+- id: growth_hormone_gh
+  name: Growth Hormone (GH)
+  type: peptide_hormone
+  aliases: [somatotropin, gh]
+  half_life_minutes: 20
+  units: ng/mL
+  reference_range: [0, 3]
+  released_by: [pituitary_anterior]
+  acts_on: [liver, muscle, bone, adipose]
+  baseline_level: 0.4
+  diurnal: true
+  tags: [growth, primary]
+
+- id: igf_1
+  name: Insulin-Like Growth Factor 1 (IGF-1)
+  type: growth_factor
+  aliases: [somatomedin_c, igf1]
+  half_life_minutes: 780
+  units: ng/mL
+  reference_range: [100, 300]
+  released_by: [liver]
+  baseline_level: 0.5
+  tags: [growth, primary]
+
+- id: free_igf_1
+  name: Free IGF-1
+  type: growth_factor
+  half_life_minutes: 30
+  units: ng/mL
+  reference_range: [0.5, 2.0]
+  baseline_level: 0.4
+  tags: [growth]
+
+- id: igf_2
+  name: Insulin-Like Growth Factor 2 (IGF-2)
+  type: growth_factor
+  aliases: [igf2, somatomedin_a]
+  half_life_minutes: 600
+  units: ng/mL
+  reference_range: [400, 900]
+  baseline_level: 0.5
+  tags: [growth]
+
+- id: igfbp_1
+  name: IGF-Binding Protein 1 (IGFBP-1)
+  type: binding_protein
+  aliases: [igfbp1]
+  half_life_minutes: 20
+  units: ng/mL
+  reference_range: [10, 40]
+  baseline_level: 0.4
+  tags: [growth, binding]
+
+- id: igfbp_3
+  name: IGF-Binding Protein 3 (IGFBP-3)
+  type: binding_protein
+  aliases: [igfbp3]
+  half_life_minutes: 720
+  units: ug/mL
+  reference_range: [3, 7]
+  baseline_level: 0.5
+  tags: [growth, binding]
+
+- id: follistatin_like_3_fstl3
+  name: Follistatin-Like 3 (FSTL3)
+  type: binding_protein
+  aliases: [fstl3, flrg]
+  half_life_minutes: 240
+  units: ng/mL
+  reference_range: [10, 40]
+  baseline_level: 0.4
+  tags: [growth, binding]
+
+- id: papp_a
+  name: Pregnancy-Associated Plasma Protein A (PAPP-A)
+  type: enzyme
+  aliases: [pappa, pappalysin_1]
+  half_life_minutes: 1440
+  units: mIU/L
+  reference_range: [5, 30]
+  baseline_level: 0.4
+  tags: [growth, pregnancy]
+
+# ── insulin and glucagon ──────────────────────────────────────────────
+- id: insulin
+  name: Insulin
+  type: peptide_hormone
+  molecular_formula: null
+  half_life_minutes: 5
+  units: mIU/L
+  reference_range: [2.6, 24.9]
+  released_by: [pancreatic_beta_cells]
+  acts_on: [liver, muscle, adipose]
+  baseline_level: 0.4
+  diurnal: true
+  tags: [metabolic, primary]
+
+- id: c_peptide
+  name: C-Peptide
+  type: peptide_hormone
+  half_life_minutes: 30
+  units: ng/mL
+  reference_range: [0.5, 2.0]
+  released_by: [pancreatic_beta_cells]
+  baseline_level: 0.4
+  tags: [metabolic, biomarker]
+
+- id: amylin
+  name: Amylin
+  type: peptide_hormone
+  aliases: [islet_amyloid_polypeptide, iapp]
+  half_life_minutes: 13
+  units: pmol/L
+  reference_range: [3, 25]
+  released_by: [pancreatic_beta_cells]
+  baseline_level: 0.4
+  tags: [metabolic]
+
+- id: glucagon
+  name: Glucagon
+  type: peptide_hormone
+  half_life_minutes: 5
+  units: pg/mL
+  reference_range: [50, 100]
+  released_by: [pancreatic_alpha_cells]
+  baseline_level: 0.4
+  tags: [metabolic]
+
+- id: irisin
+  name: Irisin
+  type: peptide_hormone
+  half_life_minutes: 60
+  units: ng/mL
+  reference_range: [0.5, 5.0]
+  released_by: [skeletal_muscle]
+  baseline_level: 0.4
+  tags: [metabolic, exercise]

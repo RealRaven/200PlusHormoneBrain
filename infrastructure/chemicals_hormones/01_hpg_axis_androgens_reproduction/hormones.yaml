@@ -1,0 +1,510 @@
+# ── steroidogenesis precursors ────────────────────────────────────────
+- id: cholesterol
+  name: Cholesterol
+  type: steroid_metabolite
+  molecular_formula: C27H46O
+  half_life_minutes: 1440
+  units: mg/dL
+  reference_range: [150, 200]
+  baseline_level: 0.6
+  tags: [steroidogenesis, precursor]
+
+- id: pregnenolone
+  name: Pregnenolone
+  type: steroid_hormone
+  molecular_formula: C21H32O2
+  half_life_minutes: 60
+  precursors: [cholesterol]
+  released_by: [adrenal_cortex, gonads]
+  baseline_level: 0.4
+  tags: [steroidogenesis]
+
+- id: progesterone
+  name: Progesterone
+  type: steroid_hormone
+  molecular_formula: C21H30O2
+  half_life_minutes: 34
+  units: ng/mL
+  reference_range: [0.1, 25]
+  precursors: [pregnenolone]
+  released_by: [corpus_luteum, placenta, adrenal_cortex]
+  baseline_level: 0.4
+  tags: [steroidogenesis, hpg]
+
+- id: 17_hydroxypregnenolone
+  name: 17-Hydroxypregnenolone
+  type: steroid_hormone
+  half_life_minutes: 30
+  precursors: [pregnenolone]
+  baseline_level: 0.3
+  tags: [steroidogenesis]
+
+- id: 17_hydroxyprogesterone
+  name: 17-Hydroxyprogesterone
+  type: steroid_hormone
+  molecular_formula: C21H30O3
+  half_life_minutes: 60
+  units: ng/dL
+  reference_range: [20, 200]
+  precursors: [progesterone]
+  released_by: [adrenal_cortex, gonads]
+  baseline_level: 0.4
+  tags: [steroidogenesis]
+
+# ── androgens ─────────────────────────────────────────────────────────
+- id: androstenedione
+  name: Androstenedione
+  type: steroid_hormone
+  molecular_formula: C19H26O2
+  half_life_minutes: 25
+  units: ng/dL
+  reference_range: [40, 150]
+  precursors: [17_hydroxyprogesterone]
+  released_by: [adrenal_cortex, gonads]
+  baseline_level: 0.4
+  tags: [androgen]
+
+- id: dehydroepiandrosterone_dhea
+  name: Dehydroepiandrosterone (DHEA)
+  type: steroid_hormone
+  molecular_formula: C19H28O2
+  half_life_minutes: 30
+  units: ng/dL
+  reference_range: [100, 500]
+  precursors: [17_hydroxypregnenolone]
+  released_by: [adrenal_cortex]
+  baseline_level: 0.5
+  tags: [androgen, prohormone]
+
+- id: dhea_s
+  name: DHEA-Sulfate
+  type: steroid_hormone
+  molecular_formula: C19H28O5S
+  half_life_minutes: 600
+  units: ug/dL
+  reference_range: [100, 400]
+  precursors: [dehydroepiandrosterone_dhea]
+  released_by: [adrenal_cortex]
+  baseline_level: 0.5
+  tags: [androgen, prohormone]
+
+- id: androstenediol
+  name: Androstenediol
+  type: steroid_hormone
+  molecular_formula: C19H30O2
+  half_life_minutes: 45
+  precursors: [dehydroepiandrosterone_dhea]
+  baseline_level: 0.3
+  tags: [androgen]
+
+- id: androsterone
+  name: Androsterone
+  type: steroid_metabolite
+  molecular_formula: C19H30O2
+  half_life_minutes: 60
+  precursors: [androstenedione]
+  released_by: [liver]
+  baseline_level: 0.3
+  tags: [androgen, metabolite]
+
+- id: testosterone
+  name: Testosterone
+  type: steroid_hormone
+  aliases: [total_testosterone]
+  molecular_formula: C19H28O2
+  half_life_minutes: 70
+  units: ng/dL
+  reference_range: [300, 1000]
+  precursors: [androstenedione, androstenediol]
+  released_by: [testes, adrenal_cortex, ovaries]
+  acts_on: [hypothalamus, pituitary_anterior, muscle, bone, prostate]
+  receptors: {nr3c4: 1.0}
+  baseline_level: 0.5
+  diurnal: true
+  tags: [androgen, primary, reproductive]
+
+- id: free_testosterone
+  name: Free Testosterone
+  type: steroid_hormone
+  half_life_minutes: 70
+  units: pg/mL
+  reference_range: [9, 30]
+  precursors: [testosterone]
+  baseline_level: 0.5
+  tags: [androgen]
+
+- id: total_testosterone
+  name: Total Testosterone
+  type: steroid_hormone
+  half_life_minutes: 70
+  units: ng/dL
+  reference_range: [300, 1000]
+  precursors: [testosterone]
+  baseline_level: 0.5
+  tags: [androgen]
+
+- id: dihydrotestosterone_dht
+  name: Dihydrotestosterone (DHT)
+  type: steroid_hormone
+  molecular_formula: C19H30O2
+  half_life_minutes: 170
+  units: ng/dL
+  reference_range: [30, 85]
+  precursors: [testosterone]
+  released_by: [prostate, skin, liver]
+  baseline_level: 0.4
+  tags: [androgen, potent]
+
+- id: three_alpha_diol
+  name: 3α-Androstanediol
+  type: steroid_metabolite
+  molecular_formula: C19H32O2
+  half_life_minutes: 45
+  precursors: [dihydrotestosterone_dht]
+  baseline_level: 0.3
+  tags: [androgen, metabolite]
+
+- id: three_alpha_androstanediol_glucuronide
+  name: 3α-Androstanediol Glucuronide
+  type: steroid_metabolite
+  half_life_minutes: 180
+  units: ng/dL
+  reference_range: [3, 25]
+  precursors: [three_alpha_diol]
+  released_by: [liver]
+  baseline_level: 0.3
+  tags: [androgen, urinary_marker]
+
+# 11-oxygenated androgens (adrenal, potent in castration-resistant prostate cancer)
+- id: 11_beta_hydroxyandrostenedione
+  name: 11β-Hydroxyandrostenedione
+  type: steroid_hormone
+  half_life_minutes: 30
+  precursors: [androstenedione]
+  baseline_level: 0.3
+  tags: [androgen]
+
+- id: 11_beta_hydroxytestosterone
+  name: 11β-Hydroxytestosterone
+  type: steroid_hormone
+  half_life_minutes: 30
+  precursors: [11_beta_hydroxyandrostenedione]
+  baseline_level: 0.3
+  tags: [androgen]
+
+- id: 11_ketodihydrotestosterone
+  name: 11-Ketodihydrotestosterone
+  type: steroid_hormone
+  half_life_minutes: 60
+  precursors: [11_ketotestosterone]
+  baseline_level: 0.2
+  tags: [androgen]
+
+- id: 11_ketotestosterone
+  name: 11-Ketotestosterone
+  type: steroid_hormone
+  half_life_minutes: 45
+  precursors: [11_beta_hydroxytestosterone]
+  baseline_level: 0.2
+  tags: [androgen]
+
+- id: 11_ketotetrahydrotestosterone
+  name: 11-Ketotetrahydrotestosterone
+  type: steroid_metabolite
+  precursors: [11_ketotestosterone]
+  baseline_level: 0.2
+  tags: [androgen, metabolite]
+
+# ── estrogens ─────────────────────────────────────────────────────────
+- id: estradiol
+  name: Estradiol (E2)
+  type: steroid_hormone
+  molecular_formula: C18H24O2
+  half_life_minutes: 780
+  units: pg/mL
+  reference_range: [15, 350]
+  precursors: [testosterone]
+  released_by: [ovaries, placenta, adipose]
+  acts_on: [hypothalamus, pituitary_anterior, uterus, bone]
+  receptors: {esr1: 1.0, esr2: 0.8}
+  baseline_level: 0.4
+  tags: [estrogen, primary, reproductive]
+
+- id: estrone
+  name: Estrone (E1)
+  type: steroid_hormone
+  molecular_formula: C18H22O2
+  half_life_minutes: 1140
+  units: pg/mL
+  reference_range: [15, 200]
+  precursors: [androstenedione]
+  released_by: [ovaries, adipose]
+  baseline_level: 0.4
+  tags: [estrogen]
+
+- id: estriol_e3
+  name: Estriol (E3)
+  type: steroid_hormone
+  molecular_formula: C18H24O3
+  half_life_minutes: 60
+  precursors: [estrone]
+  baseline_level: 0.2
+  tags: [estrogen, pregnancy]
+
+# ── enzymes and binding proteins ──────────────────────────────────────
+- id: star_protein
+  name: Steroidogenic Acute Regulatory Protein (StAR)
+  type: enzyme
+  is_measurable: false
+  tags: [steroidogenesis, enzyme]
+
+- id: p450scc_cyp11a1
+  name: Cholesterol Side-Chain Cleavage Enzyme (CYP11A1)
+  type: enzyme
+  is_measurable: false
+  tags: [steroidogenesis, enzyme]
+
+- id: cyp17a1_p450c17
+  name: 17α-Hydroxylase/17,20-Lyase (CYP17A1)
+  type: enzyme
+  is_measurable: false
+  tags: [steroidogenesis, enzyme]
+
+- id: 3beta_hsd
+  name: 3β-Hydroxysteroid Dehydrogenase
+  type: enzyme
+  is_measurable: false
+  tags: [steroidogenesis, enzyme]
+
+- id: 17beta_hsd
+  name: 17β-Hydroxysteroid Dehydrogenase
+  type: enzyme
+  is_measurable: false
+  tags: [steroidogenesis, enzyme]
+
+- id: 5_alpha_reductase
+  name: 5α-Reductase
+  type: enzyme
+  aliases: [srd5a1, srd5a2]
+  is_measurable: false
+  tags: [androgen, enzyme]
+
+- id: aromatase
+  name: Aromatase (CYP19A1)
+  type: enzyme
+  aliases: [cyp19a1, estrogen_synthase]
+  is_measurable: false
+  tags: [estrogen, enzyme]
+
+- id: steroid_sulfatase_sts
+  name: Steroid Sulfatase (STS)
+  type: enzyme
+  is_measurable: false
+  tags: [enzyme]
+
+- id: sulfotransferase_sult2a1
+  name: Sulfotransferase SULT2A1
+  type: enzyme
+  is_measurable: false
+  tags: [enzyme]
+
+- id: ugt2b17_and_ugt2b15
+  name: UGT2B17 and UGT2B15
+  type: enzyme
+  is_measurable: false
+  tags: [enzyme, glucuronidation]
+
+- id: albumin
+  name: Albumin
+  type: binding_protein
+  half_life_minutes: 1300
+  units: g/dL
+  reference_range: [3.5, 5.0]
+  is_measurable: true
+  tags: [binding]
+
+- id: shbg
+  name: Sex Hormone-Binding Globulin
+  type: binding_protein
+  aliases: [sex_hormone_binding_globulin]
+  half_life_minutes: 1200
+  units: nmol/L
+  reference_range: [10, 70]
+  tags: [binding]
+
+- id: androgen_binding_protein_abp
+  name: Androgen-Binding Protein (ABP)
+  type: binding_protein
+  is_measurable: false
+  tags: [binding]
+
+- id: cortisol_binding_globulin_cbg
+  name: Corticosteroid-Binding Globulin (CBG)
+  type: binding_protein
+  aliases: [cbg, transcortin]
+  half_life_minutes: 1440
+  tags: [binding, stress]
+
+# ── gonadal peptides and reproduction ─────────────────────────────────
+- id: gnrh
+  name: Gonadotropin-Releasing Hormone
+  type: neuropeptide
+  aliases: [lhrh, gnrh1]
+  half_life_minutes: 4
+  units: pg/mL
+  reference_range: [2, 30]
+  released_by: [hypothalamus_preoptic_area]
+  acts_on: [pituitary_anterior]
+  baseline_level: 0.4
+  tags: [hpg, primary, reproductive]
+
+- id: kisspeptin
+  name: Kisspeptin
+  type: neuropeptide
+  half_life_minutes: 4
+  released_by: [arcuate_nucleus, anteroventral_periventricular_nucleus]
+  acts_on: [gnrh_neurons]
+  baseline_level: 0.4
+  tags: [hpg, reproductive]
+
+- id: neurokinin_b
+  name: Neurokinin B
+  type: neuropeptide
+  half_life_minutes: 5
+  released_by: [arcuate_nucleus]
+  acts_on: [kisspeptin_neurons]
+  baseline_level: 0.4
+  tags: [hpg, reproductive]
+
+- id: gonadotropin_inhibitory_hormone_gnih
+  name: Gonadotropin-Inhibitory Hormone (GnIH)
+  type: neuropeptide
+  aliases: [rfrp3]
+  half_life_minutes: 5
+  released_by: [hypothalamus]
+  baseline_level: 0.3
+  tags: [hpg]
+
+- id: luteinizing_hormone_lh
+  name: Luteinizing Hormone (LH)
+  type: peptide_hormone
+  aliases: [lh]
+  half_life_minutes: 30
+  units: mIU/mL
+  reference_range: [1, 9]
+  released_by: [pituitary_anterior]
+  acts_on: [testes, ovaries]
+  baseline_level: 0.4
+  tags: [hpg, primary, reproductive]
+
+- id: fsh
+  name: Follicle-Stimulating Hormone (FSH)
+  type: peptide_hormone
+  aliases: [follicle_stimulating_hormone]
+  half_life_minutes: 240
+  units: mIU/mL
+  reference_range: [1, 10]
+  released_by: [pituitary_anterior]
+  acts_on: [testes, ovaries]
+  baseline_level: 0.4
+  tags: [hpg, primary, reproductive]
+
+- id: inhibin_b
+  name: Inhibin B
+  type: peptide_hormone
+  half_life_minutes: 240
+  units: pg/mL
+  reference_range: [30, 250]
+  released_by: [sertoli_cells, granulosa_cells]
+  baseline_level: 0.4
+  tags: [hpg]
+
+- id: activin
+  name: Activin
+  type: peptide_hormone
+  half_life_minutes: 30
+  released_by: [pituitary_anterior, gonads]
+  baseline_level: 0.4
+  tags: [hpg]
+
+- id: follistatin
+  name: Follistatin
+  type: binding_protein
+  half_life_minutes: 240
+  units: ng/mL
+  reference_range: [1, 10]
+  baseline_level: 0.4
+  tags: [hpg, binding]
+
+- id: anti_mullerian_hormone_amh
+  name: Anti-Müllerian Hormone (AMH)
+  type: peptide_hormone
+  aliases: [amh, mullerian_inhibiting_substance]
+  half_life_minutes: 720
+  units: ng/mL
+  reference_range: [0.5, 5.0]
+  released_by: [sertoli_cells, granulosa_cells]
+  baseline_level: 0.4
+  tags: [hpg, reproductive]
+
+- id: insl3
+  name: Insulin-Like 3 (INSL3)
+  type: peptide_hormone
+  aliases: [relaxin_like_factor, leydig_insulin_like_3]
+  half_life_minutes: 30
+  released_by: [leydig_cells]
+  baseline_level: 0.4
+  tags: [hpg]
+
+- id: gdnf
+  name: Glial Cell Line-Derived Neurotrophic Factor (GDNF)
+  type: growth_factor
+  aliases: [gdnf_family]
+  half_life_minutes: 30
+  released_by: [sertoli_cells, glia]
+  baseline_level: 0.4
+  tags: [hpg, neurotrophic, testicular]
+
+- id: stem_cell_factor_scf
+  name: Stem Cell Factor (SCF)
+  type: growth_factor
+  aliases: [kit_ligand, scf]
+  half_life_minutes: 60
+  baseline_level: 0.4
+  tags: [hpg, growth]
+
+- id: testicular_transferrin
+  name: Testicular Transferrin
+  type: binding_protein
+  is_measurable: false
+  tags: [hpg, binding]
+
+- id: intratesticular_lactate
+  name: Intratesticular Lactate
+  type: other
+  aliases: [testicular_lactate]
+  is_measurable: false
+  tags: [hpg, metabolic]
+
+- id: clusterin
+  name: Clusterin
+  type: other
+  aliases: [apoj, testosterone_repressed_prostate_message_2]
+  half_life_minutes: 720
+  released_by: [many_tissues]
+  baseline_level: 0.4
+  tags: [reproductive]
+
+# Canonical home for prolactin — HPG axis. Tagged for social bonding.
+- id: prolactin
+  name: Prolactin
+  type: peptide_hormone
+  half_life_minutes: 50
+  units: ng/mL
+  reference_range: [4, 23]
+  released_by: [pituitary_anterior]
+  acts_on: [mammary_gland, hypothalamus, testes, ovaries]
+  interacts_with:
+    dopamine: "tonic inhibition by dopamine"
+  baseline_level: 0.4
+  tags: [hpg, primary, reproductive, social_bonding, parental_behavior]

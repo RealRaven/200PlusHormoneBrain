@@ -1,0 +1,34 @@
+- id: comt
+  name: Catechol-O-Methyltransferase (COMT)
+  type: enzyme
+  aliases: [catechol_o_methyltransferase]
+  is_measurable: false
+  tags: [enzyme, detox, catecholamine]
+
+- id: cyp3a4
+  name: Cytochrome P450 3A4
+  type: enzyme
+  aliases: [cytochrome_p450_3a4]
+  is_measurable: false
+  tags: [enzyme, detox]
+
+- id: gst_alpha_and_mu
+  name: Glutathione S-Transferase α and μ
+  type: enzyme
+  aliases: [gsta, gstm]
+  is_measurable: false
+  tags: [enzyme, detox]
+
+- id: nrf2
+  name: NRF2
+  type: other
+  aliases: [nfe2l2, nuclear_factor_erythroid_2_like_2]
+  is_measurable: false
+  tags: [transcription_factor, detox]
+
+- id: p_glycoprotein_abc_mca
+  name: P-Glycoprotein (ABCB1/MDR1)
+  type: transporter
+  aliases: [p_gp, abcb1, mdr1]
+  is_measurable: false
+  tags: [transporter, detox, efflux]

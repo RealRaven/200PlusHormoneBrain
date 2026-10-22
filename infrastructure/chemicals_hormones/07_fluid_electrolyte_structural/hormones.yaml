@@ -1,0 +1,225 @@
+- id: renin
+  name: Renin
+  type: enzyme
+  half_life_minutes: 15
+  units: ng/mL/h
+  reference_range: [0.6, 4.3]
+  released_by: [kidney_juxtaglomerular_apparatus]
+  baseline_level: 0.4
+  tags: [fluid, primary, raas]
+
+- id: angiotensin_ii
+  name: Angiotensin II
+  type: peptide_hormone
+  aliases: [ang_ii]
+  half_life_minutes: 1
+  units: pg/mL
+  reference_range: [10, 30]
+  precursors: [angiotensinogen]
+  released_by: [lung, endothelium]
+  acts_on: [vasculature, adrenal_cortex, brain]
+  baseline_level: 0.4
+  tags: [fluid, primary, raas]
+
+- id: anp
+  name: Atrial Natriuretic Peptide (ANP)
+  type: peptide_hormone
+  aliases: [atrial_natriuretic_peptide]
+  half_life_minutes: 3
+  units: pg/mL
+  reference_range: [20, 80]
+  released_by: [cardiac_atria]
+  baseline_level: 0.4
+  tags: [fluid, natriuretic]
+
+- id: bnp
+  name: Brain Natriuretic Peptide (BNP)
+  type: peptide_hormone
+  aliases: [b_type_natriuretic_peptide]
+  half_life_minutes: 20
+  units: pg/mL
+  reference_range: [0, 100]
+  released_by: [cardiac_ventricles]
+  baseline_level: 0.4
+  tags: [fluid, natriuretic, cardiac_marker]
+
+- id: urodilatin
+  name: Urodilatin
+  type: peptide_hormone
+  half_life_minutes: 30
+  released_by: [kidney]
+  baseline_level: 0.3
+  tags: [fluid, natriuretic]
+
+- id: aquaporin_2_aqp2
+  name: Aquaporin-2 (AQP2)
+  type: transporter
+  aliases: [aqp2]
+  is_measurable: false
+  tags: [fluid, transporter]
+
+- id: endothelial_nitric_oxide_eno
+  name: Endothelial Nitric Oxide (eNOS-derived)
+  type: gasotransmitter
+  aliases: [eno, enos_derived_no]
+  half_life_minutes: 1
+  baseline_level: 0.4
+  tags: [fluid, vascular]
+
+- id: endothelin_1_et1
+  name: Endothelin-1 (ET-1)
+  type: peptide_hormone
+  aliases: [et1]
+  half_life_minutes: 4
+  units: pg/mL
+  reference_range: [1, 5]
+  released_by: [vascular_endothelium]
+  baseline_level: 0.4
+  tags: [fluid, vascular]
+
+- id: adrenomedullin
+  name: Adrenomedullin
+  type: peptide_hormone
+  half_life_minutes: 22
+  units: pmol/L
+  reference_range: [10, 30]
+  released_by: [vascular_endothelium]
+  baseline_level: 0.4
+  tags: [fluid, vascular]
+
+- id: parathyroid_hormone_pth
+  name: Parathyroid Hormone (PTH)
+  type: peptide_hormone
+  aliases: [pth, parathormone]
+  half_life_minutes: 4
+  units: pg/mL
+  reference_range: [10, 65]
+  released_by: [parathyroid_glands]
+  acts_on: [bone, kidney, intestine]
+  baseline_level: 0.4
+  tags: [fluid, calcium, primary]
+
+- id: calcitonin
+  name: Calcitonin
+  type: peptide_hormone
+  half_life_minutes: 10
+  units: pg/mL
+  reference_range: [0, 15]
+  released_by: [thyroid_parafollicular_cells]
+  baseline_level: 0.4
+  tags: [fluid, calcium]
+
+- id: calcitriol_vitamin_d3
+  name: Calcitriol (1,25-Dihydroxyvitamin D3)
+  type: steroid_hormone
+  aliases: [vitamin_d3, 1_25_oh2d3]
+  molecular_formula: C27H44O3
+  half_life_minutes: 600
+  units: pg/mL
+  reference_range: [30, 80]
+  released_by: [kidney]
+  baseline_level: 0.5
+  tags: [fluid, calcium, primary]
+
+- id: fibroblast_growth_factor_23_fgf23
+  name: Fibroblast Growth Factor 23 (FGF23)
+  type: growth_factor
+  aliases: [fgf23, phosphatonin]
+  half_life_minutes: 30
+  units: RU/mL
+  reference_range: [20, 100]
+  released_by: [osteocytes]
+  baseline_level: 0.4
+  tags: [fluid, phosphate]
+
+- id: sclerostin
+  name: Sclerostin
+  type: other
+  half_life_minutes: 60
+  units: pmol/L
+  reference_range: [10, 50]
+  released_by: [osteocytes]
+  baseline_level: 0.4
+  tags: [bone]
+
+- id: osteocalcin
+  name: Osteocalcin
+  type: other
+  half_life_minutes: 5
+  units: ng/mL
+  reference_range: [10, 40]
+  released_by: [osteoblasts]
+  baseline_level: 0.4
+  tags: [bone]
+
+- id: osteopontin
+  name: Osteopontin
+  type: other
+  aliases: [spp1]
+  half_life_minutes: 30
+  units: ng/mL
+  reference_range: [10, 60]
+  baseline_level: 0.4
+  tags: [bone, immune]
+
+- id: c_telopeptide_ctx_1
+  name: C-Telopeptide of Type I Collagen (CTX-1)
+  type: other
+  aliases: [ctx, ctx_1, beta_crosslaps]
+  half_life_minutes: 60
+  units: pg/mL
+  reference_range: [50, 600]
+  released_by: [bone_resorption]
+  baseline_level: 0.4
+  tags: [bone, resorption_marker]
+
+- id: erythropoietin_epo
+  name: Erythropoietin (EPO)
+  type: peptide_hormone
+  aliases: [epo, epoetin]
+  half_life_minutes: 360
+  units: mIU/mL
+  reference_range: [4, 26]
+  released_by: [kidney]
+  baseline_level: 0.5
+  tags: [hematologic, primary]
+
+- id: hepcidin
+  name: Hepcidin
+  type: peptide_hormone
+  half_life_minutes: 60
+  units: ng/mL
+  reference_range: [10, 60]
+  released_by: [liver]
+  baseline_level: 0.4
+  tags: [iron, hematologic]
+
+- id: thrombopoietin
+  name: Thrombopoietin (TPO)
+  type: peptide_hormone
+  aliases: [tpo, thrombopoietin_factor]
+  half_life_minutes: 1440
+  units: pg/mL
+  reference_range: [7, 100]
+  released_by: [liver]
+  baseline_level: 0.5
+  tags: [hematologic]
+
+- id: myostatin
+  name: Myostatin (GDF-8)
+  type: growth_factor
+  aliases: [gdf8, growth_differentiation_factor_8]
+  half_life_minutes: 60
+  units: ng/mL
+  reference_range: [1, 10]
+  released_by: [skeletal_muscle]
+  baseline_level: 0.4
+  tags: [muscle]
+
+- id: relaxin
+  name: Relaxin
+  type: peptide_hormone
+  half_life_minutes: 60
+  released_by: [corpus_luteum, placenta]
+  baseline_level: 0.3
+  tags: [reproductive, pregnancy]

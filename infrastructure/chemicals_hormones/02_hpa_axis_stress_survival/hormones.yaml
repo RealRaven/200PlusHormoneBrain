@@ -1,0 +1,191 @@
+- id: crh
+  name: Corticotropin-Releasing Hormone
+  type: neuropeptide
+  aliases: [corticoliberin, crf, corticotropin_releasing_factor]
+  half_life_minutes: 4
+  response_time_minutes: 1
+  units: pg/mL
+  reference_range: [5, 40]
+  released_by: [hypothalamus_pvn]
+  acts_on: [pituitary_anterior]
+  interacts_with:
+    cortisol: "negative feedback — cortisol suppresses CRH release"
+    acth: "stimulates ACTH release"
+  baseline_level: 0.4
+  diurnal: true
+  tags: [stress, primary]
+
+- id: pomc
+  name: Pro-Opiomelanocortin
+  type: prohormone
+  aliases: [pomc_precursor]
+  half_life_minutes: 20
+  response_time_minutes: 15
+  precursors: [crh]
+  released_by: [pituitary_anterior, arcuate_nucleus]
+  interacts_with:
+    acth: "cleaved into ACTH and beta-LPH and beta-endorphin"
+  baseline_level: 0.5
+  diurnal: true
+  tags: [stress]
+
+- id: acth
+  name: Adrenocorticotropic Hormone
+  type: peptide_hormone
+  aliases: [corticotropin, adrenocorticotropin]
+  half_life_minutes: 15
+  response_time_minutes: 2
+  units: pg/mL
+  reference_range: [10, 60]
+  precursors: [pomc, crh]
+  released_by: [pituitary_anterior]
+  acts_on: [adrenal_cortex]
+  baseline_level: 0.4
+  diurnal: true
+  tags: [stress, primary]
+
+- id: cortisol
+  name: Cortisol
+  type: steroid_hormone
+  subtype: glucocorticoid
+  aliases: [hydrocortisone]
+  molecular_formula: C21H30O5
+  half_life_minutes: 90
+  response_time_minutes: 15
+  units: nmol/L
+  reference_range: [140, 690]
+  precursors: [11_deoxycortisol]
+  released_by: [adrenal_cortex]
+  acts_on: [hippocampus, amygdala, prefrontal_cortex, hypothalamus, liver]
+  receptors: {nr3c1: 1.0, nr3c2: 0.5}
+  interacts_with:
+    crh: "negative feedback"
+    acth: "negative feedback"
+    aldosterone: "saturates MR in high states"
+  baseline_level: 0.5
+  diurnal: true
+  tags: [stress, primary]
+
+- id: cortisone
+  name: Cortisone
+  type: steroid_hormone
+  molecular_formula: C21H28O5
+  half_life_minutes: 30
+  units: nmol/L
+  reference_range: [30, 150]
+  precursors: [cortisol]
+  released_by: [liver, kidney]
+  baseline_level: 0.4
+  tags: [stress]
+
+- id: 11_deoxycortisol
+  name: 11-Deoxycortisol
+  type: steroid_hormone
+  aliases: [cortexolone, reichstein_substance_s]
+  molecular_formula: C21H30O4
+  half_life_minutes: 60
+  units: nmol/L
+  reference_range: [0.3, 3.0]
+  precursors: [17_hydroxyprogesterone]
+  released_by: [adrenal_cortex]
+  baseline_level: 0.3
+  tags: [stress]
+
+- id: tetrahydrocortisol_thf
+  name: Tetrahydrocortisol (THF)
+  type: steroid_metabolite
+  half_life_minutes: 180
+  units: ug/24h
+  reference_range: [1500, 5000]
+  precursors: [cortisol]
+  released_by: [liver]
+  baseline_level: 0.4
+  tags: [stress, urinary_marker]
+
+- id: tetrahydrocortisone_the
+  name: Tetrahydrocortisone (THE)
+  type: steroid_metabolite
+  half_life_minutes: 180
+  units: ug/24h
+  reference_range: [1000, 4000]
+  precursors: [cortisone]
+  released_by: [liver]
+  baseline_level: 0.4
+  tags: [stress, urinary_marker]
+
+- id: 11_beta_hsd_type_1
+  name: 11β-Hydroxysteroid Dehydrogenase type 1
+  type: enzyme
+  aliases: [hsd11b1]
+  is_measurable: false
+  tags: [stress, enzyme]
+
+- id: 11_beta_hsd_type_2
+  name: 11β-Hydroxysteroid Dehydrogenase type 2
+  type: enzyme
+  aliases: [hsd11b2]
+  is_measurable: false
+  tags: [stress, enzyme]
+
+- id: 11_deoxycorticosterone
+  name: 11-Deoxycorticosterone (DOC)
+  type: steroid_hormone
+  molecular_formula: C21H30O3
+  half_life_minutes: 30
+  precursors: [progesterone]
+  released_by: [adrenal_cortex]
+  baseline_level: 0.3
+  tags: [stress, mineralocorticoid]
+
+# Canonical home for aldosterone — HPA axis (adrenal cortex)
+- id: aldosterone
+  name: Aldosterone
+  type: steroid_hormone
+  molecular_formula: C21H28O5
+  half_life_minutes: 20
+  units: pmol/L
+  reference_range: [100, 950]
+  precursors: [11_deoxycorticosterone]
+  released_by: [adrenal_cortex]
+  acts_on: [kidney, colon]
+  receptors: {nr3c2: 1.0}
+  baseline_level: 0.4
+  tags: [mineralocorticoid, fluid]
+
+- id: chromogranin_a
+  name: Chromogranin A
+  type: peptide_hormone
+  aliases: [cga]
+  half_life_minutes: 18
+  units: nmol/L
+  reference_range: [0.5, 3.0]
+  released_by: [adrenal_medulla]
+  baseline_level: 0.4
+  tags: [stress, biomarker]
+
+- id: neuropeptide_y_npy
+  name: Neuropeptide Y
+  type: neuropeptide
+  aliases: [npy]
+  half_life_minutes: 20
+  units: pg/mL
+  reference_range: [50, 150]
+  released_by: [arcuate_nucleus, locus_coeruleus]
+  baseline_level: 0.4
+  tags: [stress, appetite]
+
+- id: agrp
+  name: Agouti-Related Protein
+  type: neuropeptide
+  half_life_minutes: 30
+  released_by: [arcuate_nucleus]
+  baseline_level: 0.4
+  tags: [appetite, stress]
+
+- id: pacap
+  name: Pituitary Adenylate Cyclase-Activating Polypeptide
+  type: neuropeptide
+  half_life_minutes: 5
+  released_by: [hypothalamus, adrenal_medulla]
+  baseline_level: 0.4
+  tags: [stress]

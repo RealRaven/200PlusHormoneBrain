@@ -1,0 +1,18 @@
+# config/memory_types.yaml
+long_term:
+  explicit:
+    episodic: {implemented: true, backend: chroma, decay: fast}
+    semantic: {implemented: true, backend: chroma, decay: slow}
+  implicit:
+    procedural: {implemented: true, backend: adapter_registry}
+    reinforcement_value_based_learning: {implemented: false}
+    non_sociative_learning: {implemented: false}
+    classical_associative_conditioning: {implemented: false, kind: metadata}
+    stimulus_response_s_r_learning: {implemented: false, kind: metadata, same_as: classical_associative_conditioning}
+    emotional_valence: {implemented: false, kind: metadata}
+    motor_sensorimotor_adaptation: {implemented: false, kind: metadata}
+    temporal_sequence_learning: {implemented: false, kind: metadata}
+    implicit_social_cognitive: {implemented: false, kind: config}
+short_term:
+  working: {implemented: true, backend: in_memory, ttl_seconds: 300}
+  priming: {implemented: false, backend: in_memory}
