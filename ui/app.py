@@ -1,5 +1,4 @@
 import os
-
 import streamlit as st
 
 from api_client import GatewayClient
@@ -22,31 +21,60 @@ with col_brain:
     brain_panel.render(state)
 
 with col_mono:
-    mono = st.empty()
     monologue_panel.render("")
+    mono_placeholder = st.empty()
 
 with col_resp:
-    resp = st.empty()
     response_panel.render("")
+    resp_placeholder = st.empty()
 
 message = st.chat_input("Talk to the brain...")
 
 if message:
-    internal_acc: list[str] = []
-    spoken_acc: list[str] = []
-
+    full_text = ""
+    
+    # Clear the placeholders when a new message starts
+    mono_placeholder.empty()
+    resp_placeholder.empty()
+    
     for event in client.chat_stream(message):
         t = event.get("type")
+        
         if t == "state":
             with col_brain:
                 brain_panel.render(event["data"])
-        elif t == "internal_delta":
-            internal_acc.append(event["content"])
-            mono.markdown(f"*{''.join(internal_acc)}*")
-        elif t == "spoken_delta":
-            spoken_acc.append(event["content"])
-            resp.markdown("".join(spoken_acc))
+                
+        elif t in ("delta", "internal_delta", "spoken_delta"):
+            full_text += event.get("content", "")
+            
+            # Robust parsing: Split by the <spoken> tag
+            internal_text = ""
+            spoken_text = ""
+            
+            if "<spoken>" in full_text:
+                # Everything before <spoken> is the internal monologue
+                parts = full_text.split("<spoken>", 1)
+                internal_raw = parts[0]
+                spoken_text = parts[1]
+                
+                # Clean up closing spoken tag if it has arrived
+                if "</spoken>" in spoken_text:
+                    spoken_text = spoken_text.split("</spoken>", 1)[0]
+            else:
+                # If no <spoken> tag yet, everything is still internal
+                internal_raw = full_text
+                
+            # Clean up the internal tags
+            internal_text = internal_raw.replace("<internal>", "").replace("</internal>", "").strip()
+            spoken_text = spoken_text.replace("</spoken>", "").strip()
+            
+            # Render to the UI
+            if internal_text:
+                mono_placeholder.markdown(f"*{internal_text}*")
+            if spoken_text:
+                resp_placeholder.markdown(spoken_text)
+                
         elif t == "error":
-            st.error(event["message"])
+            st.error(event.get("message", "Unknown error"))
         elif t == "done":
             break
