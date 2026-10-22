@@ -1,3 +1,8 @@
+> [!WARNING]  
+> 🚧 **UNDER CONSTRUCTION - NO STABLE RELEASE YET** 🚧
+> 
+> This project is currently in early development. The core loop (vLLM + Gateway + UI) and the simulated chemical ticking are functional, but features like the state-dependent memory layer are still in progress. Expect breaking changes, missing features, and bugs.
+
 # 200PlusHormoneBrain
 
 An LLM that runs on a live neuroendocrine simulation — 215 chemicals, a
