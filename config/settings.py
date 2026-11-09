@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    model_id: str = "google/gemma-2-2b-it"
+    model_id: str = "TrueRealRaven/gemma-4-E2B-it-heretic-v1"
     vllm_base_url: str = "http://vllm:8001/v1"
     vllm_api_key: str = "EMPTY"
 

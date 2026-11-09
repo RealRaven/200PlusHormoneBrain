@@ -4,7 +4,7 @@ import os
 
 from huggingface_hub import snapshot_download
 
-model_id = os.environ.get("MODEL_ID", "google/gemma-2-2b-it")
+model_id = os.environ.get("MODEL_ID", "TrueRealRaven/gemma-4-E2B-it-heretic-v1")
 token = os.environ.get("HF_TOKEN") or None
 
 print(f"Pulling {model_id}...")

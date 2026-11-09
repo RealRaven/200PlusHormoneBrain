@@ -1,0 +1,157 @@
+"""
+infrastructure.brainparts.forebrain.telencephalon.cerebral_hemispheres.left.cortex.cingulate.brodmann_areas.brodmann_area_32
+=========================================================================================================================
+
+Brodmann area 32 — left hemisphere.
+
+A CONSTANT + CONFIG HOLDER. No compute, no state, no lifecycle. Declares the
+canonical identity of area 32, says which functional sub-module owns it, and
+supplies the per-area weights that the owning sub-module's `encode()` reads.
+It defines no classes and no functions; the public surface is the four names
+under "EXPORTS".
+
+If you are looking for the computation area 32 participates in, it is in
+`.../cingulate/anterior_cingulate/` — area 32 is the error/performance-
+monitoring area of the ACC's dorsal cognitive division. This package is the
+*label*, not the *agent*.
+
+IDENTITY
+--------
+    AREA_ID   = 32
+    NAME      = "Brodmann area 32"
+    SYSTEM    = "anterior_cingulate"
+    LOBE      = "cingulate"
+    SIDE      = "left"
+
+ANATOMY
+-------
+    ANATOMY = {
+        "name": "Brodmann area 32",
+        "system": "anterior_cingulate",
+        "location": "dorsal anterior cingulate gyrus, anterior to area 24 "
+                    "and extending rostrally toward the pregenual ACC and "
+                    "the medial prefrontal cortex",
+        "cytoarchitecture": "dysgranular/agranular cortex; transitional "
+                            "between the agranular ACC and the granular "
+                            "medial prefrontal cortex",
+        "notes": (
+            "Together with area 24 it forms the ACC's dorsal cognitive "
+            "division. Area 32 sits more rostrally than area 24, closer "
+            "to medial prefrontal cortex (mPFC), and its connectivity "
+            "reflects that position: strong coupling to mPFC and to "
+            "ventromedial prefrontal cortex, in addition to DLPFC. "
+            "Functionally area 32 is the error/performance-monitoring "
+            "node — it carries the larger share of the ACC's `error` "
+            "channel, computing prediction error between expected and "
+            "actual outcomes, and it weighs performance evaluation more "
+            "heavily than conflict detection. Where area 24 answers "
+            "'which candidate is winning?', area 32 answers 'did what "
+            "happen match what I predicted, and how well am I doing?'. "
+            "The division is functional, not just anatomical: the two "
+            "areas use the same four-channel ACC output, but with "
+            "different per-channel shares and different feature "
+            "emphases. Area 25, the affective division, lives as a "
+            "sibling package (cingulate/subgenual_area_25/) and carries "
+            "the affect channel alone."
+        ),
+    }
+
+CONFIG (LEFT)
+-------------
+The ACC has FOUR output channels (conflict, error, affect, control_demand),
+not one aggregate. Config is therefore organised per-channel: for each
+channel, the areas that carry it each declare a share, and the shares
+across areas sum to 1.0. Areas 24 and 32 share the three cognitive
+channels; area 25 carries the affect channel from its own package.
+
+    LEFT_CONFIG = {
+        # ---- per-channel shares within the ACC ----
+        # conflict: 24 carries the larger share (principal conflict
+        # monitoring); 32 takes the remainder.
+        "conflict_weight":        0.40,   # area 24: 0.60
+
+        # error: 32 carries the larger share (error/performance
+        # monitoring); 24 takes the remainder.
+        "error_weight":           0.65,   # area 24: 0.35
+
+        # control_demand: shared evenly; both areas project to DLPFC and
+        # pre-SMA, and the demand signal is computed jointly.
+        "control_demand_weight":  0.50,   # area 24: 0.50
+
+        # affect: owned by area 25 (subgenual). Areas 24 and 32
+        # contribute zero here by design; a non-zero value would signal
+        # a bug in the channel partition.
+        "affect_weight":          0.00,   # area 25: 1.00
+
+        # ---- feature emphases inside this area's contribution ----
+        # LEFT bias: verbal/lexical prediction error and verbally-
+        # mediated performance evaluation. Area 32's profile is more
+        # error/performance oriented than area 24's; conflict-related
+        # features are present but weighted lower.
+        "lexical_conflict":          0.50,   # area 24: 0.70
+        "spatial_conflict":          0.35,   # area 24: 0.40
+        "verbal_prediction_error":   0.75,   # area 24: 0.55
+        "spatial_prediction_error":  0.40,   # area 24: 0.35
+        "verbal_control_demand":     0.55,   # area 24: 0.65
+        "spatial_control_demand":    0.40,   # area 24: 0.40
+
+        # ---- connectivity priors to partner structures ----
+        "to_dlpfc":               0.60,   # area 24: 0.70
+        "to_pre_sma":             0.50,   # area 24: 0.60
+        "to_mpfc":                0.75,   # strong; rostral position
+        "to_vmpfc":               0.60,   # strong; outcome evaluation link
+        "to_parietal":            0.40,   # area 24: 0.45
+        "to_insula":              0.30,   # area 24: 0.35
+        "to_subgenual_25":        0.55,   # channel handoff to affective div.
+        "to_posterior_cingulate": 0.35,   # area 24: 0.30
+        "to_motor_cortex":        0.35,   # area 24: 0.45
+        "to_commissures":         0.40,   # cross-midline error handoff
+    }
+
+    Notes on the weights:
+      - Per-channel shares (conflict/error/control_demand/affect) are
+        constrained: for each channel, the shares across areas 24, 32, and
+        25 sum to 1.0. The mirror-assertion test should check this
+        constraint, not just left-vs-right symmetry.
+      - `affect_weight: 0.00` here is intentional and load-bearing. If
+        area 32 ever contributes to affect, the channel partition has
+        been broken and should be fixed in the ACC class, not by tuning
+        this weight.
+      - Feature weights are multipliers on features extracted by the ACC
+        sub-module. Area 32's `verbal_prediction_error` (0.75) is the
+        single highest feature weight in the ACC on the left — it is the
+        area's principal contribution to the `error` channel.
+      - Connectivity priors parameterise how strongly this area's signal
+        reaches partner structures when the ACC combines areas. Area 32's
+        profile is the more rostral/medial-prefrontal of the two cognitive
+        areas — stronger mPFC and vmPFC coupling, weaker pre-SMA and motor
+        coupling than area 24 — consistent with its role as the
+        outcome-evaluation (rather than action-selection) contributor.
+      - All values are plausible priors, not measured constants. The key
+        constraints are the channel-sum invariant and the left/right
+        mirror.
+
+EXPORTS
+-------
+    from .brodmann_area_32 import BRODMANN_32    # int, == AREA_ID
+    from .brodmann_area_32 import ANATOMY
+    from .brodmann_area_32 import LEFT_CONFIG
+    from .brodmann_area_32 import SYSTEM         # str, "anterior_cingulate"
+
+Consumers should use these names directly. Anything not listed here is private
+and may change.
+
+WHAT THIS PACKAGE MUST NOT DO
+-----------------------------
+    - Must not define an `encode()`, `step()`, or any stateful object.
+    - Must not import `anterior_cingulate/` (cycle; the ACC imports from
+      here, not the other way round).
+    - Must not import `subgenual_area_25/` (same layer; cross-references go
+      through docstrings and the ACC class, not registry-to-package imports).
+    - Must not contain runtime logic of any kind.
+    - Must not diverge in structure from the right hemisphere's area-32
+      package — same AREA_ID, SYSTEM, ANATOMY, same config keys; only the
+      values differ. As with area 24, the per-channel shares
+      (conflict/error/control_demand/affect) are structural and identical
+      across hemispheres; only feature/connectivity weights mirror.
+"""
