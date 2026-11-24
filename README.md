@@ -2310,10 +2310,6 @@ What's planned:
 
 - **Not a medical device.** Nothing here is clinically validated. No
   output from this project should inform any health decision.
-- **Not a consciousness claim.** The model has a state. It does not
-  have experience, qualia, or self-awareness. The word "thinks" in this
-  README is shorthand for "generates a reasoning trace," not a claim
-  about phenomenology.
 - **Not a safety-aligned assistant.** The underlying model has had its
   refusal direction removed. It will express content that a standard
   model would decline. That's the point of the internal-monologue panel,
